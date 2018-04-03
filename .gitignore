@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea
+# dependencies
+/node_modules
+# setting
+# production
+/.next
+.DS_Store
+
+*.iml
+.gradle
+
+package-lock.json

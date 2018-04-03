@@ -1,0 +1,33 @@
+{
+  "presets": [
+    "next/babel",
+    "stage-0"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "es2015"
+      ],
+      "plugins": [
+        "inline-import"
+      ]
+    }
+  },
+  "plugins": [
+    [
+      "styled-components", {
+      "ssr": true,
+      "displayName": true
+    }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "~": "./"
+        }
+      }
+    ]
+  ]
+}
