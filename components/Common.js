@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { CircularProgress } from 'material-ui'
-import { Gold } from '../lib/helpers/commonStyle'
+import { Blue400, White } from '../lib/helpers/commonStyle'
 
 const TitleArea = props => (
   <TitleAreaWrapper>
@@ -44,7 +44,7 @@ margin: 0 10px;
 `
 const Loader = () => (
   <FullWidthCenterContainer>
-    <CircularProgress size={100} thickness={7} color={Gold}/>
+    <CircularProgress size={100} thickness={7} color={White}/>
   </FullWidthCenterContainer>
 )
 const CalendarIcon = () =>

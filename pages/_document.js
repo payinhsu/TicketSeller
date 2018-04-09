@@ -26,7 +26,7 @@ export default class MyDocument extends Document {
               font-family:Helvetica Neue, Helvetica, Arial, PingFang TC, 微软雅黑, Microsoft YaHei, 华文细黑, STHeiti, sans-serif;
               -webkit-box-sizing: border-box;
                       box-sizing: border-box;
-              font-weight: 100;
+              font-weight: 350;
               font-size: 13px;
               -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             }

@@ -8,10 +8,10 @@
     "dev": "export NODE_ENV=localhost|| set NODE_ENV=localhost&& node server.js",
     "build-dev": "export NODE_ENV=development|| set NODE_ENV=development&& next build",
     "build-stage": "export NODE_ENV=stage|| set NODE_ENV=stage&& next build",
-    "build-prd": "export NODE_ENV=production|| set NODE_ENV=production&& next build",
+    "build": "export NODE_ENV=production|| set NODE_ENV=production&& next build",
     "start-dev": "export NODE_ENV=development|| set NODE_ENV=development&& node server.js",
     "start-stage": "export NODE_ENV=stage|| set NODE_ENV=stage&& node server.js",
-    "start-prd": "export NODE_ENV=production|| set NODE_ENV=production&& node server.js"
+    "start": "export NODE_ENV=production|| set NODE_ENV=production&& next build&& node server.js"
   },
   "engines": {
     "node": "~6.12.0",
@@ -26,6 +26,7 @@
     "babel-plugin-styled-components": "1.3.0",
     "babel-preset-stage-0": "6.24.1",
     "body-parser": "1.18.2",
+    "cors": "^2.8.4",
     "express": "4.16.2",
     "express-graphql": "0.6.11",
     "graphql": "0.11.7",

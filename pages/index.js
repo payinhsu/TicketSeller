@@ -10,11 +10,11 @@ export default compose(
   withApolloProvider,
   withRedux(initStore)
 )(() => (
-               <Layout>
-               <Container>
-               <HintText>Welcome to Ticket Seller</HintText>
-               </Container>
-               </Layout>
+  <Layout>
+    <Container>
+      <HintText>Welcome to Ticket Seller</HintText>
+    </Container>
+  </Layout>
 ))
 
 const Fading = keyframes`
@@ -38,7 +38,7 @@ flex-direction:column;
 `
 const HintText = styled.div`
 margin-top:50px;
-color:white;
+color:#2F323E;
 font-size:30px;
 animation: ${Fading} 3s linear infinite;
 display:flex;

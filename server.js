@@ -2,6 +2,7 @@ const express = require('express')
 const next = require('next')
 const {NODE_ENV} = process.env
 const config = require('./config')
+const cors = require('cors')
 const app = next({
   dev: config[NODE_ENV].NODE_ENV === 'production'
     ? false
@@ -15,6 +16,12 @@ const resolvers = require('./lib/graphql/resolvers')
 
 app.prepare().then(() => {
   const server = express()
+  /* cross domain setting */
+  server.use(cors({
+    origin: config[NODE_ENV].CROSS_DOMAIN,
+    credential: true,
+  }))
+
   /* body parser */
   server.use(require('body-parser').json())
 
@@ -44,14 +51,15 @@ app.prepare().then(() => {
     return handle(req, res)
   })
 
-  server.listen(config[NODE_ENV].SERVER_PORT, (err) => {
+  server.listen(process.env.PORT || 5000, (err) => { /* heroku can't using config[NODE_ENV].SERVER_PORT */
     if (err) throw err
     console.log(`> NODE_ENV: ${config[NODE_ENV].NODE_ENV}`)
-    console.log(`> Server running on PORT: ${config[NODE_ENV].SERVER_PORT}`)
+    console.log(`> Server running on PORT: ${process.env.PORT}`)
     console.log(`> Server connecting to: ${config[NODE_ENV].API_HOST}`)
+    console.log(`> Cross domain allow: ${config[NODE_ENV].CROSS_DOMAIN}`)
 
   })
 }).catch((ex) => {
-  console.error(ex.stack)
+  console.error(`> Error stack: ${ex.stack}`)
   process.exit(1)
 })

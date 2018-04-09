@@ -20,11 +20,11 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Head from 'next/head'
 import { toggleTargetTabOpenState } from '~/lib/actions'
-import { Gold, LightGray, Mirage } from '../lib/helpers/commonStyle'
+import { Gold, Blue400, Mirage, White, Gray } from '../lib/helpers/commonStyle'
 import moment from 'moment'
 import { Loader } from '../components/Common'
 
-const pollingIntervalInMs = 5000
+const pollingIntervalInMs = 5000;
 
 const Fader = ({ children }) => (
   <CSSTransitionGroup
@@ -34,7 +34,7 @@ const Fader = ({ children }) => (
   >
     {children}
   </CSSTransitionGroup>
-)
+);
 
 export default compose(
   withState('currentTime', 'setCurrentTime', moment().clone()),
@@ -59,7 +59,7 @@ export default compose(
   ),
   lifecycle({
     componentDidMount () {
-      if (!this.props.loginData.loginInformation.isLogin) return Router.push('/')
+      // if (!this.props.loginData.loginInformation.isLogin) return Router.push('/')
       this.setPollingInterval = setInterval(() => {
         this.props.setCurrentTime(moment().clone())
       }, 1000)
@@ -68,38 +68,31 @@ export default compose(
       window.clearInterval(this.setPollingInterval)
     }
   }),
-  graphql(gql`
-    query GetDepositTransitionOrdersByStatus {
-      transactionOrders(transactionGateWay: "DEPOSIT", status: ["WAITING"], paymentModes: ["BANK_CARD"], page: 0, pageSize: 1) {
-        totalElements
-      }
-    }
-  `, {
-    name: 'depositData',
-    options: {
-      pollInterval: pollingIntervalInMs,
-    }
-  }),
-  graphql(gql`
-    query GetWithdrawTotalElements {
-      transactionOrders(transactionGateWay: "WITHDRAW", status: ["WAITING","WAITING_REMIT"], paymentModes: ["BANK_CARD"], page: 0, pageSize: 1) {
-        totalElements
-      }
-    }
-  `, {
-    name: 'withdrawData',
-    options: {
-      pollInterval: pollingIntervalInMs,
-    }
-  }),
+  // graphql(gql`
+  //   query GetDepositTransitionOrdersByStatus {
+  //     transactionOrders(transactionGateWay: "DEPOSIT", status: ["WAITING"], paymentModes: ["BANK_CARD"], page: 0, pageSize: 1) {
+  //       totalElements
+  //     }
+  //   }
+  // `, {
+  //   name: 'depositData',
+  //   options: {
+  //     pollInterval: pollingIntervalInMs,
+  //   }
+  // }),
+  // graphql(gql`
+  //   query GetWithdrawTotalElements {
+  //     transactionOrders(transactionGateWay: "WITHDRAW", status: ["WAITING","WAITING_REMIT"], paymentModes: ["BANK_CARD"], page: 0, pageSize: 1) {
+  //       totalElements
+  //     }
+  //   }
+  // `, {
+  //   name: 'withdrawData',
+  //   options: {
+  //     pollInterval: pollingIntervalInMs,
+  //   }
+  // }),
   mapProps(props => {
-    const deposit = !props.depositData.transactionOrders || isEmpty(props.depositData.transactionOrders)
-      ? 0
-      : props.depositData.transactionOrders[0].totalElements
-    const withdraw = !props.withdrawData.transactionOrders || isEmpty(props.withdrawData.transactionOrders)
-      ? 0
-      : props.withdrawData.transactionOrders[0].totalElements
-    const total = '?'
     const weekDayMapping = [
       '日',
       '一',
@@ -108,19 +101,16 @@ export default compose(
       '四',
       '五',
       '六',
-    ]
+    ];
 
     const time = `台北時間：`
                  + props.currentTime.format('YYYY/M/D')
                  + ` 星期${weekDayMapping[props.currentTime.weekday()]}`
-                 + ` ${props.currentTime.format('HH:mm:ss')}`
+                 + ` ${props.currentTime.format('HH:mm:ss')}`;
     return {
       ...props,
-      withdraw,
-      deposit,
-      total,
       time,
-    }
+    };
   }),
   connect(state => ({
     tabs: state.tabs,
@@ -133,7 +123,7 @@ export default compose(
     }
   })
 )(props => {
-  let { withdraw, deposit, total, time, isOpenDropDownMenu, setOpenDropDownMenu } = props
+  let { time, isOpenDropDownMenu, setOpenDropDownMenu } = props;
   let style = {
     fill: '#fff',
     width: '34px',
@@ -180,11 +170,12 @@ export default compose(
         `}</style>
       </Head>
       {
-        props.tabs.map((tab, tabIndex) => (
+        props.tabs.map((tab, tabIndex) => {
+          return (
           <div key={`${tabIndex}_TAB`}>
             <MenuItemWrapper onClick={() => props.toggleTargetTabOpenState({ tabIndex: tab.tabIndex })}>
               <MenuItemLeft>
-                <MenuItemIcon index={tabIndex} />
+                <MenuItemIcon iconName={tab.iconName} />
                 <MenuItemText>{tab.displayName}</MenuItemText>
               </MenuItemLeft>
               <MenuItemArrow isOpening={tab.tabIsOpen} />
@@ -199,11 +190,10 @@ export default compose(
               }
             </MenuItemContentWrapper>
           </div>
-        ))
+        )})
       }
       <MenuItemMobile>
         <MenuItemWrapper onClick={props.onLogoutBtnClick}><MenuItemText>登出</MenuItemText></MenuItemWrapper>
-        <MenuItemWrapper lastChild />
       </MenuItemMobile>
     </div>
 
@@ -211,7 +201,6 @@ export default compose(
     if (!isOpenDropDownMenu) return null
     return (
       <DropDownMenu>
-        {renderAvatarArea()}
         {renderTabs()}
       </DropDownMenu>
     )
@@ -220,7 +209,6 @@ export default compose(
   return (
     <Container>
       <SideBar>
-        {renderAvatarArea()}
         <SideBarBackground>
           {renderTabs()}
         </SideBarBackground>
@@ -265,10 +253,10 @@ height: 100vh;
 const SideBar = styled.div`
 font-size: 15px;
 top: 0;
-bottom: 139px;
+bottom: 0;
 position: fixed;
 width: ${SideBarWidth};
-background: #191C20;
+background: #F1F8E9;
 @media(max-width: 1170px) and (min-width: 769px) {
   width: ${SideBarWidthMid};
 }
@@ -278,9 +266,7 @@ background: #191C20;
 `
 const AvatarArea = styled.div`
 padding: 38px 0 20px 0;
-background: #0e1016;
-border-bottom: solid 1px #C9B482;
-background: #0e1016 url(/static/images/K_logo.png) no-repeat left top;
+background: ${White} url(/static/images/K_logo.png) no-repeat left top;
 background-size: contain;
 @media(max-width: 1170px) and (min-width: 768px) {
   padding: 10px 0 20px 0;
@@ -325,8 +311,8 @@ color: #FFF;
 `
 const MainContainer = styled.div`
 width: 100%;
-background: ${Mirage};
-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+background: ${White};
+box-shadow: 0 2px 5px 0 rgba(24, 255, 255, 0.16);
 @media (max-width: 768px) {
   position: ${props => props.isOpenDropDownMenu === true ? 'fixed' : 'relative' };
 }
@@ -335,7 +321,7 @@ const MainContent = styled.div`
 margin-left: ${SideBarWidth};
 top: 53px;
 width: ${MainContentWidth};
-background: ${Mirage};
+background: ${White};
 position: absolute;
 overflow-y: auto;
 @media(max-width: 1170px) and (min-width: 769px) {
@@ -356,7 +342,7 @@ align-items: center;
 cursor: pointer;
 background: rgba(255,255,255,0);
 transition: all 0.2s ease-out;
-border-bottom: ${props => props.lastChild ? 0 : '1px solid rgba( 63, 69, 85, 0.6)' };
+box-shadow: 0 1px 3px rgba(24, 255, 255, 0.56);
 &:hover {
   background: rgba(255,255,255,0.1);
 }
@@ -382,14 +368,14 @@ justify-content: space-between;
 const MenuItemIcon = styled.div`
 width: 20px;
 height: 20px;
-background: url(/static/images/cd-nav-icons-${props => props.index && props.index}.svg) no-repeat left top;
+background: url(/static/svg/icon/${props => props.iconName}.svg) no-repeat left top;
 background-size: cover;
 @media(max-width: 1170px) and (min-width: 768px) {
   align-self: center;
 }
 `
 const MenuItemText = styled.div`
-color: #C9B482;
+color: ${White};
 font-weight: 500;
 @media(max-width: 1170px) and (min-width: 769px) {
   font-size: 15px;
@@ -402,7 +388,7 @@ font-weight: 500;
 const MenuItemArrow = styled.div`
 transform: ${props => props.isOpening ? 'translateX(0) rotate(360deg)' : 'translateX(0) rotate(180deg)'};
 transition: all 0.3s ease-out;
-background: url(/static/images/cd-arrow.svg) no-repeat;
+background: url(/static/images/arrow_down_white_24px.svg) no-repeat;
 background-size: contain;
 width: 16px;
 height: 16px;
@@ -410,15 +396,13 @@ height: 16px;
 `
 const SideBarBackground = styled.div`
 box-shadow: inset -3px 0 3px rgba(0,0,0,.3);
-background: #0e1016 url(/static/images/left_bg.png) no-repeat left bottom;
+background: ${Blue400} url(/static/images/left_bg.png) no-repeat left bottom;
 background-size: contain;
 height: 100%;
 overflow-y: auto;
 `
 const MenuItemContentWrapper = styled.div`
 line-height: 17.25px;
-background: rgba( 28, 31, 34, 0.8);
-border-bottom: 1px solid rgba( 63, 69, 85, 0.6);
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -428,11 +412,10 @@ cursor: pointer;
 const MenuItemContent = styled.a`
 width: 100%;
 text-align: center;
-color: #aaa;
+color: ${White};
 text-decoration:none;
 &:hover {
-  color: #C9B482;
-  text-decoration: underline;
+  color: rgba(24, 255, 255, 0.56);
 }
 @media(max-width: 768px) {
   font-size: 17.5px;
@@ -447,7 +430,7 @@ position: fixed;
 top: 0;
 width: ${MainContentWidth};
 height: 53px;
-background: #323643;
+background: ${Blue400};
 box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
 display: flex;
 align-items: center;
@@ -464,17 +447,17 @@ const NavBarListWrapper = styled.div`
 display: flex;
 `
 const NavBarList = styled.div`
-color: ${props => props.gold ? Gold : '#fff'}; 
+color: ${props => props.black ? Mirage : White}; 
 display: flex;
 font-size: 13px;
-border-left: solid 1px ${LightGray};
+border-left: solid 1px ${Blue400};
 padding: 0 17px;
 height: 25px;
 align-items: center;
-font-weight: 100;
+font-weight: 300;
 cursor: pointer;
 &:hover {
-  color: ${Gold};
+  color: '#18FFFF';
 }
 `
 const Badge = styled.div`
@@ -488,13 +471,13 @@ font-weight: 500;
 `
 const TimeWrapper = styled.div`
 display: flex;
-color: ${LightGray};
+color: ${White};
 font-size: 12px;
 align-items: center;
 margin-right: 48px;
 `
 const TimeIcon = styled.div`
-background: url(/static/images/cd-nav-icons-time.svg) no-repeat 0 0;
+background: url(/static/svg/icon/ic_av_timer_24px.svg) no-repeat 0 0;
 width: 27px;
 height: 24px;
 margin-right: 10px;
@@ -503,14 +486,14 @@ const NavBarMobileWrapper = styled.div`
 display: none;
 @media (max-width: 768px) {
   display: block;
-  background: #323743 url(/static/images/K_s_logo.png) no-repeat left top;
+  background: ${Blue400} url(/static/images/K_s_logo.png) no-repeat left top;
   background-size: contain;
   z-index: 2;
   top: 0;
   left: 0;
   height: 45px;
   width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(24, 255, 255, 0.16);
   -webkit-font-smoothing: antialiased;
 }
 `
@@ -519,7 +502,7 @@ height: 45px;
 `
 const DropDownMenu = styled.div`
 width: 100%; 
-background: #0e1016; 
+background: ${Blue400}; 
 position: absolute;
 min-height: 100vh;
 z-index: 2;
@@ -544,7 +527,7 @@ height: 45px;
 const LoadingContainer = styled.div`
 width:100vw;
 height:100vh;
-background:#191D28;
+background:${Blue400};
 display:flex;
 align-items:center;
 justify-content:center;
