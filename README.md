@@ -1,34 +1,18 @@
-## Deploy
-
-1. npm install
-
-2. export NODE_ENV=production|| set NODE_ENV=production&& next build
-
-4. Upload files to deploy environment
-    1. .next
-    2. lib
-    3. config.js
-    4. server.js
-    5. package.json
-5. run command in order to run the server
-    1. npm install
-    2. export NODE_ENV=production|| set NODE_ENV=production&& node server.js
-
 ## Start to heroku
     $ brew install heroku/brew/heroku
     $ heroku login
-
-## Deployment to Heroku
+    
+## Deploy to Heroku
     $ git init
-    $ heroku git: remote -a ticket-selling-tw
+    $ heroku git: remote -a aia-node-nextjs
     $ git add -A
     $ git commit -am "Initial commit"
 
     Clone the repository
-    Use Git to clone ticket-selling-tw's source code to your local machine.
+    Use Git to clone aia-node-nextjs's source code to your local machine.
 
-    $ heroku git:clone -a ticket-selling-tw
-    $ cd ticket-selling-tw
+    $ heroku git:clone -a aia-node-nextjs
+    $ cd aia-node-nextjs
     Deploy your changes
     Make some changes to the code you just cloned and deploy them to Heroku using Git.
 
@@ -40,6 +24,12 @@
     $ git push -f heroku develop:master
 
     $ heroku run python manage.py migrate
+
+## Deployment to Heroku by docker from scratch
+    $ heroku container:login
+    $ git clone https://github.com/peterhsu2018/AIA_node_nextjs.git
+    $ heroku create (app-name)
+    $ heroku container:push web (-app app-name)
 
 ## Heroku log
     $ heroku logs -t
