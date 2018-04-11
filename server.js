@@ -51,10 +51,10 @@ app.prepare().then(() => {
     return handle(req, res)
   })
 
-  server.listen(process.env.PORT || 5000, (err) => { /* heroku can't using config[NODE_ENV].SERVER_PORT */
+  server.listen(config[NODE_ENV].SERVER_PORT || 5000, (err) => { /* heroku can't using config[NODE_ENV].SERVER_PORT */
     if (err) throw err
     console.log(`> NODE_ENV: ${config[NODE_ENV].NODE_ENV}`)
-    console.log(`> Server running on PORT: ${process.env.PORT}`)
+    console.log(`> Server running on PORT: ${config[NODE_ENV].SERVER_PORT}`)
     console.log(`> Server connecting to: ${config[NODE_ENV].API_HOST}`)
     console.log(`> Cross domain allow: ${config[NODE_ENV].CROSS_DOMAIN}`)
 
