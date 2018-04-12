@@ -44,8 +44,8 @@
 ## Deployment to Heroku by docker from scratch
     $ heroku container:login
     $ git clone https://github.com/payinhsu/TicketSeller.git
-    $ heroku create
-    $ heroku container:push web
+    $ heroku create (app-name)
+    $ heroku container:push web (-app app-name)
 
 ## Heroku log
     $ heroku logs -t
