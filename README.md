@@ -41,6 +41,12 @@
 
     $ heroku run python manage.py migrate
 
+## Deployment to Heroku by docker from scratch
+    $ heroku container:login
+    $ git clone https://github.com/payinhsu/TicketSeller.git
+    $ heroku create
+    $ heroku container:push web
+
 ## Heroku log
     $ heroku logs -t
 
