@@ -2,7 +2,7 @@ const express = require('express');
 const next = require('next');
 
 const { NODE_ENV } = process.env;
-const config = require('./config');
+const config = require('../config');
 const cors = require('cors');
 
 const app = next({
@@ -11,8 +11,8 @@ const app = next({
 const handle = app.getRequestHandler();
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
-const typeDefs = require('./lib/graphql/typeDefs');
-const resolvers = require('./lib/graphql/resolvers');
+const typeDefs = require('../lib/graphql/typeDefs');
+const resolvers = require('../lib/graphql/resolvers');
 
 app.prepare().then(() => {
   const server = express();

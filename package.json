@@ -5,13 +5,13 @@
   "license": "MIT",
   "scripts": {
     "test": "export NODE_ENV=test|| set NODE_ENV=test&& jest",
-    "dev": "export NODE_ENV=localhost|| set NODE_ENV=localhost&& node server.js",
+    "dev": "export NODE_ENV=localhost|| set NODE_ENV=localhost&& node server/index.js",
     "build-dev": "export NODE_ENV=development|| set NODE_ENV=development&& next build",
     "build-stage": "export NODE_ENV=stage|| set NODE_ENV=stage&& next build",
     "build": "export NODE_ENV=production|| set NODE_ENV=production&& next build",
-    "start-dev": "export NODE_ENV=development|| set NODE_ENV=development&& node server.js",
-    "start-stage": "export NODE_ENV=stage|| set NODE_ENV=stage&& node server.js",
-    "start": "export NODE_ENV=production|| set NODE_ENV=production&& next build&& node server.js"
+    "start-dev": "export NODE_ENV=development|| set NODE_ENV=development&& node server/index.js",
+    "start-stage": "export NODE_ENV=stage|| set NODE_ENV=stage&& node server/index.js",
+    "start": "export NODE_ENV=production|| set NODE_ENV=production&& node server/index.js"
   },
   "engines": {
     "node": "~6.12.0",

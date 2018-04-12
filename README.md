@@ -1,24 +1,8 @@
-## Deploy
-
-1. npm install
-
-2. export NODE_ENV=production|| set NODE_ENV=production&& next build
-
-4. Upload files to deploy environment
-    - .next
-    - lib
-    - config.js
-    - server.js
-    - package.json
-5. run command in order to run the server
-    1. npm install
-    2. export NODE_ENV=production|| set NODE_ENV=production&& node server.js
-
 ## Start to heroku
     $ brew install heroku/brew/heroku
     $ heroku login
 
-## Deployment to Heroku
+## Deploy to Heroku
     $ git init
     $ heroku git: remote -a ticket-selling-tw
     $ git add -A
