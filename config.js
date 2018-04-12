@@ -1,9 +1,9 @@
 const env = {
   production: {
-    CLIENT_HOST       :'https://ticket-selling-tw.herokuapp.com',
+    CLIENT_HOST       :'https://floating-harbor-73075.herokuapp.com/',
     NODE_ENV          :'production',
     SERVER_PORT       :'5000',
-    API_HOST          :'https://ticket-selling-tw.herokuapp.com',
+    API_HOST          :'https://floating-harbor-73075.herokuapp.com/',
     CROSS_DOMAIN       : '*',
   },
   stage: {
