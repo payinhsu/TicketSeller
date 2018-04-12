@@ -15,7 +15,4 @@ RUN npm install
 # Copy all local files into the image.
 COPY . .
 
-# Build for production.
-RUN npm run build
-
 CMD [ "npm", "start" ]
