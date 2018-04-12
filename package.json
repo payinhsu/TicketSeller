@@ -11,8 +11,7 @@
     "build": "export NODE_ENV=production|| set NODE_ENV=production&& next build",
     "start-dev": "export NODE_ENV=development|| set NODE_ENV=development&& node server.js",
     "start-stage": "export NODE_ENV=stage|| set NODE_ENV=stage&& node server.js",
-    "start": "export NODE_ENV=production|| set NODE_ENV=production&& node server.js",
-    "postinstall": "export NODE_ENV=production|| set NODE_ENV=production&& next build"
+    "start": "export NODE_ENV=production|| set NODE_ENV=production&& next build&& node server.js"
   },
   "engines": {
     "node": "~6.12.0",

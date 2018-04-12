@@ -16,5 +16,6 @@ RUN npm install
 COPY . .
 
 # Build for production.
-CMD [ "npm", "postinstall" ]
+RUN npm run build
+
 CMD [ "npm", "start" ]
