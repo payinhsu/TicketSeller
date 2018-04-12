@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 const { NODE_ENV } = process.env;
-const env = require('./config');
+const env = require('./server/config');
 
 module.exports = {
   webpack: (config, { dev }) => {

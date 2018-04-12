@@ -2,7 +2,7 @@ const express = require('express');
 const next = require('next');
 
 const { NODE_ENV } = process.env;
-const config = require('../config');
+const config = require('./config');
 const cors = require('cors');
 
 const app = next({
