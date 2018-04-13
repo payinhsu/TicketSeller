@@ -4,7 +4,7 @@ const env = {
     NODE_ENV: 'production',
     SERVER_PORT: '5000',
     API_HOST: 'https://ticket-seller-tw.herokuapp.com',
-    CROSS_DOMAIN: '*',
+    CROSS_DOMAIN: 'https://ticket-seller-tw.herokuapp.com',
   },
   stage: {
     CLIENT_HOST: '',
