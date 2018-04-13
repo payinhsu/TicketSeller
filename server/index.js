@@ -1,5 +1,6 @@
 const express = require('express');
 const next = require('next');
+const { express: voyagerMiddleware } = require('graphql-voyager/middleware');
 
 const { NODE_ENV } = process.env;
 const config = require('./config');
@@ -44,6 +45,12 @@ app.prepare().then(() => {
   }));
   server.use('/graphiql', graphiqlExpress({
     endpointURL: graphqlEndpoint,
+  }));
+  server.use('/voyager', voyagerMiddleware({
+    endpointUrl: graphqlEndpoint,
+    displayOptions: {
+      sortByAlphabet: true,
+    },
   }));
 
   server.get('*', (req, res) => handle(req, res));
